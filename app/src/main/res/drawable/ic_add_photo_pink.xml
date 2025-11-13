@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#E91E63"> <!-- 딥 핑크(Deep Pink) 색상을 적용합니다. -->
+
+    <!-- 사진(이미지) 형태와 + (추가) 표시를 결합한 아이콘의 경로 데이터입니다. -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M19 12v7H5V5h14v2h2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zM12 18l-3-4-2 3h12l-5-7zM22 5h-2V3h-2v2h-2v2h2v2h2V7h2V5z"/>
+</vector>

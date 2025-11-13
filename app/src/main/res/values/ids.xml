@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tab_map" type="id" />
+    <item name="search_bar_card" type="id" />
+    <item name="tab_favorite" type="id" />
+    <item name="tab_search" type="id" />
+    <item name="tab_mypage" type="id" />
+    <item name="ratingDisplayTextView" type="id" />
+    <item name="starRatingBar" type="id" />
+</resources>

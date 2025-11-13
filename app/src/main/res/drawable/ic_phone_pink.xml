@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 1. 핑크색 원형 배경 -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#F8DCE2" /> <!-- 연한 핑크색 배경 -->
+            <size android:width="56dp" android:height="56dp"/>
+        </shape>
+    </item>
+
+    <!-- 2. 휴대폰 아이콘 (흰색) -->
+    <item android:drawable="@drawable/ic_phone_white"
+        android:left="16dp"
+        android:right="16dp"
+        android:top="16dp"
+        android:bottom="16dp" />
+</layer-list>
