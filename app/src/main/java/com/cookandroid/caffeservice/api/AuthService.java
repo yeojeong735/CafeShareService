@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
+
 public interface AuthService {
 
     // 기존 로그인 엔드포인트
@@ -15,7 +16,7 @@ public interface AuthService {
     );
 
     // ⭐️ 새로 추가할 회원가입 엔드포인트 ⭐️
-    @POST("api/v1/auth/signup") // 서버의 실제 회원가입 경로로 변경하세요.
+    @POST("api/v1/auth/signup") // 서버의 실제 회원가입 경로로 변경하세요.->api경로 넣어야해서 잠시 오류나는 것임 기달
     Call<SignupResponse> signup(
             @Body SignupRequest request
     );
