@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // ⭐️ 서버의 기본 URL을 여기에 입력하세요. (예: "http://192.168.0.10:8080/")
-    private static final String BASE_URL = "https://your-server-domain.com/";
+    private static final String BASE_URL = "http://10.0.2.2:3000/";
 
     private static Retrofit retrofit = null;
     private static AuthService authService = null;

@@ -15,9 +15,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import com.cookandroid.caffeservice.api.RetrofitClient;
-import com.cookandroid.caffeservice.LoginData.SignupRequest; // Signup 요청 모델
-import com.cookandroid.caffeservice.LoginData.SignupResponse; // Signup 응답 모델
+import com.cookandroid.caffeservice.LoginData.SignupRequest;
+import com.cookandroid.caffeservice.LoginData.SignupResponse;
+import com.cookandroid.caffeservice.LoginActivity; // 로그인 액티비티 임포트
 
+import java.io.IOException;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -31,7 +33,6 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // ⚠️ 회원가입 XML 레이아웃 파일 이름으로 변경하세요.
         setContentView(R.layout.activity_signup);
 
         // 1. UI 요소 초기화 및 연결
@@ -72,13 +73,20 @@ public class SignupActivity extends AppCompatActivity {
             // 서버 응답 도착 (HTTP 통신 성공)
             @Override
             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                // 로그를 먼저 출력하여 서버 응답 확인 (디버깅)
+                Log.d(TAG, "Server Response Code: " + response.code());
+
                 if (response.isSuccessful()) {
                     // HTTP Status Code 200~300 (성공)
                     SignupResponse signupResponse = response.body();
 
                     if (signupResponse != null && signupResponse.isSuccess()) {
                         // ⭐️ 회원가입 성공 로직:
-                        Toast.makeText(SignupActivity.this, signupResponse.getMessage() + " 이제 로그인하세요.", Toast.LENGTH_LONG).show();
+                        String successMessage = signupResponse.getMessage() != null ?
+                                signupResponse.getMessage() : "회원가입에 성공했습니다.";
+
+                        Toast.makeText(SignupActivity.this, successMessage + " 이제 로그인하세요.", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "Signup Success: " + successMessage);
 
                         // 성공 후 로그인 화면으로 이동
                         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
@@ -88,19 +96,35 @@ public class SignupActivity extends AppCompatActivity {
                     } else {
                         // 회원가입 실패 (서버 응답에서 success=false인 경우, 예: ID 중복)
                         String errorMessage = (signupResponse != null && signupResponse.getMessage() != null) ?
-                                signupResponse.getMessage() : "회원가입에 실패했습니다. (서버 응답 오류)";
+                                signupResponse.getMessage() : "회원가입에 실패했습니다. (서버 응답 형식 오류)";
+
                         Toast.makeText(SignupActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        Log.w(TAG, "Signup Failed (Server Logic): " + errorMessage);
                     }
                 } else {
                     // HTTP Status Code 오류 (예: 400 Bad Request, 500 Internal Server Error 등)
-                    Toast.makeText(SignupActivity.this, "회원가입 실패: 서버 응답 오류 (" + response.code() + ")", Toast.LENGTH_LONG).show();
+                    String errorMsg = "서버 응답 오류 (" + response.code() + ")";
+
+                    // 상세 오류 메시지 파싱 시도 (JSON 응답이 아닐 수도 있음)
+                    if (response.errorBody() != null) {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            errorMsg += ". 상세: " + errorBody;
+                            Log.e(TAG, "Signup Failed (HTTP Error " + response.code() + "): " + errorBody);
+                        } catch (IOException e) {
+                            Log.e(TAG, "Error parsing error body: " + e.getMessage());
+                        }
+                    }
+
+                    Toast.makeText(SignupActivity.this, "회원가입 실패: " + errorMsg, Toast.LENGTH_LONG).show();
                 }
             }
 
             // 네트워크 통신 자체 실패 (URL 오류, 인터넷 연결 끊김 등)
             @Override
             public void onFailure(Call<SignupResponse> call, Throwable t) {
-                Toast.makeText(SignupActivity.this, "네트워크 연결 실패: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                String networkError = "네트워크 연결 실패: " + t.getMessage();
+                Toast.makeText(SignupActivity.this, networkError, Toast.LENGTH_LONG).show();
                 Log.e(TAG, "API Call Failed: " + t.getMessage(), t);
             }
         });
