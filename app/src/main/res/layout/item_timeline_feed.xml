@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/item_bottom_border"> <!-- 구분선 Drawable 필요 -->
+
+    <!-- 별 아이콘 (사용자가 클릭했음을 나타내는 역할) -->
+    <ImageView
+        android:id="@+id/ivStarIndicator"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_star_outline"
+        app:tint="#FFC0CB"
+        android:contentDescription="즐겨찾기 표시" />
+
+    <!-- 카페 정보 (이름과 주소) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- 1. 카페 이름 (크게) -->
+        <TextView
+            android:id="@+id/tvTimelineCafeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[카페 이름]"
+            android:textColor="#BF4C65"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <!-- 2. 카페 주소 (작게) -->
+        <TextView
+            android:id="@+id/tvTimelineAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="[카페 주소]"
+        android:textColor="#E39FAE"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <!-- 더보기 아이콘 (선택 사항) -->
+    <ImageView
+        android:id="@+id/ivMoreOptions"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_more_vert"
+        app:tint="#999999"
+        android:contentDescription="옵션 더보기" />
+
+</LinearLayout>

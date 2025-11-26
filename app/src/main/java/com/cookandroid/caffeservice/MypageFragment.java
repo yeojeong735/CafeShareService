@@ -13,11 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog; // AlertDialog를 사용하기 위해 추가
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.Fragment;
 
 // Note: 이 Fragment는 MainActivity에 포함되어 있다고 가정합니다.
@@ -31,6 +32,9 @@ public class MypageFragment extends Fragment {
     private LinearLayout logoutButtonContainer;
     private TextView nicknameTextView;
     private ImageView settingsIcon;
+    private RecyclerView rvTimelineFeed;
+    private TimelineAdapter timelineAdapter;
+    private ArrayList<TimelineData> timelineList;
 
     @Nullable
     @Override
@@ -179,4 +183,21 @@ public class MypageFragment extends Fragment {
             }
         }
     }
+
+
+    private void initTimelineRecyclerView() {
+        ArrayList<TimelineData> timelineList = new ArrayList<>();
+
+        // 사용자 활동 기록 (클릭한 카페 목록처럼) 더미 데이터
+        // 데이터 형식: (카페 이름, 주소, 기록 날짜)
+        timelineList.add(new TimelineData("카페 피드", "서울시 마포구 동교동", "2025-11-25"));
+        timelineList.add(new TimelineData("더존매터", "서울시 마포구 성미산로", "2025-11-23"));
+        timelineList.add(new TimelineData("카페드레브", "서울시 강남구 테헤란로", "2025-11-20"));
+        timelineList.add(new TimelineData("쿠이케", "서울시 종로구 삼청동", "2025-11-18"));
+
+        TimelineAdapter timelineAdapter = new TimelineAdapter(timelineList);
+        rvTimelineFeed.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvTimelineFeed.setAdapter(timelineAdapter);
+    }
+
 }
