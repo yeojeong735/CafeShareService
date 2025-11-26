@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">CaffeService</string>
 
-    <!-- RatingBar에 핑크색을 적용하는 스타일 (AppTheme 안에 포함시키거나 별도로 사용) -->
+    <string name="server_client_id">696281205748-37gkrf7kpcd35kls78b4u87t9pcibcon.apps.googleusercontent.com</string>
+
     <style name="PinkRatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">#E0E0E0</item> <!-- 비활성화된 별의 색상 (연한 회색) -->
-        <item name="colorControlActivated">#E91E63</item> <!-- 활성화된 별의 색상 (진한 핑크색) -->
-    </style>
+        <item name="colorControlNormal">#E0E0E0</item> <item name="colorControlActivated">#E91E63</item> </style>
 
 </resources>
