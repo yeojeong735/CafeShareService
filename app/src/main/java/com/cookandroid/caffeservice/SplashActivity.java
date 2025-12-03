@@ -8,16 +8,15 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * 앱 시작 시 일정 시간 동안 표시되는 스플래시 화면 액티비티입니다.
+ * 앱 시작 시 일정 시간 동안 표시되는 스플래시 화면 액티비티
  */
 public class SplashActivity extends AppCompatActivity {
 
-    // 스플래시 화면 유지 시간 (5000ms = 5초)
-    private static final int SPLASH_TIME_OUT = 5000;
+    // 스플래시 화면 유지 시간 (3000ms = 3초)
+    private static final int SPLASH_TIME_OUT = 3000;
 
-    // TODO: 회원가입 화면 클래스 이름을 SignUpActivity로 가정합니다.
-    // 실제 SignUpActivity.java 파일이 없으면 이 이름으로 새로 생성해야 합니다.
-    private Class<?> nextActivity = LoginActivity.class;
+    // 이동할 화면 LoginActivity에서 MainActivity로 변경
+    private Class<?> nextActivity = MainActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        // XML 레이아웃 파일 연결 (R.layout.activity_splash는 직접 생성해야 합니다)
+        // XML 레이아웃 파일 연결
         setContentView(R.layout.activity_splash);
 
         // 지정된 시간이 지난 후 다음 액티비티로 이동

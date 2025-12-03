@@ -9,9 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- 삭제된 코드
-    android:dataExtractionRules="@xml/data_extraction_rules"
-    android:fullBackupContent="@xml/backup_rules"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,7 +22,7 @@
         <!-- Google Maps API Key 설정 -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBt67GfwEc3fK4lE7hGX10cRsmZEmpYpkE" />
+            android:value="AIzaSyA6eDUlgBQkqc9Ap_FQ0Evyg91ZS4-iSJo" />
 
         <activity
             android:name=".SplashActivity"
