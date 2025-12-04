@@ -28,15 +28,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/tvSearchBar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="카페, 주소 검색"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/icon_color"/>
+            android:paddingEnd="10dp">
+
+            <EditText
+                android:id="@+id/etSearchBar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="카페, 주소 검색"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:textStyle="bold"
+                android:textColorHint="@color/icon_color"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="15sp" />
+
+            <!-- 검색 버튼 -->
+            <ImageView
+                android:id="@+id/btnSearchHome"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_search"
+                app:tint="#E39FAE"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

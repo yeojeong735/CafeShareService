@@ -1,6 +1,7 @@
 package com.cookandroid.caffeservice.CafeData;
 
 import java.io.Serializable;
+
 public class CafeData implements Serializable {
     private String name;
     private String address;
