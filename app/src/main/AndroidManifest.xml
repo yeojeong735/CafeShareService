@@ -24,32 +24,31 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA6eDUlgBQkqc9Ap_FQ0Evyg91ZS4-iSJo" />
 
+        <!-- 스플래시 액티비티 -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"> <!-- 스플래시용 테마 -->
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- 로그인 액티비티 -->
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
 
+        <!-- 회원가입 액티비티 -->
         <activity
             android:name=".SignupActivity"
             android:exported="false" />
 
+        <!-- 메인 액티비티 -->
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
 
     </application>
 

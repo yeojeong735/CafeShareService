@@ -21,8 +21,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
 
+    <!-- [수정됨] LinearLayout의 ID 변경 (EditText와 이름 겹침 방지) -->
     <LinearLayout
-        android:id="@+id/edit_text_signup_id"
+        android:id="@+id/signup_form_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -33,7 +34,7 @@
 
         <!-- 아이디 입력 -->
         <EditText
-            android:id="@+id/edit_text_signup_password"
+            android:id="@+id/edit_text_signup_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -47,7 +48,7 @@
 
         <!-- 비밀번호 입력 -->
         <EditText
-            android:id="@+id/edit_text_password"
+            android:id="@+id/edit_text_signup_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -67,7 +68,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bottom_line_pink"
             android:hint="이름 입력"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:minHeight="48dp"
             android:paddingBottom="10dp"
             android:textColorHint="#E39FAE"
@@ -85,9 +86,8 @@
         android:textSize="18sp"
         app:backgroundTint="#DD7793"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_signup_id"
+        app:layout_constraintTop_toBottomOf="@+id/signup_form_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

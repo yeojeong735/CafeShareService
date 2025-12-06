@@ -1,4 +1,4 @@
-package com.cookandroid.caffeservice.api; // ⚠️ 실제 프로젝트의 패키지 이름으로 변경하세요.
+package com.cookandroid.caffeservice.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

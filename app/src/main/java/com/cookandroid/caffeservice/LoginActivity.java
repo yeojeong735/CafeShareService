@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import com.cookandroid.caffeservice.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

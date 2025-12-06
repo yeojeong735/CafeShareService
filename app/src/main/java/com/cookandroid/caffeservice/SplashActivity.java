@@ -15,9 +15,6 @@ public class SplashActivity extends AppCompatActivity {
     // 스플래시 화면 유지 시간 (3000ms = 3초)
     private static final int SPLASH_TIME_OUT = 3000;
 
-    // 이동할 화면 LoginActivity에서 MainActivity로 변경
-    private Class<?> nextActivity = MainActivity.class;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +30,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // SignUpActivity로 이동
-                Intent intent = new Intent(SplashActivity.this, nextActivity);
+                // LoginActivity로 이동
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
 
                 // 현재 스플래시 액티비티를 종료 (뒤로가기 버튼으로 돌아오지 않도록)
