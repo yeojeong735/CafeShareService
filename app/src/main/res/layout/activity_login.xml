@@ -83,9 +83,11 @@
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
         android:text="로그인"
-        android:textColor="#FFFFFF"  android:textSize="18sp"
-
-        app:backgroundTint="#DD7793"  app:rippleColor="#FFFFFF"     app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:backgroundTint="#DD7793"
+        app:rippleColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_container" />
 
@@ -136,42 +138,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
+        <!-- 핸드폰 버튼 -->
+        <ImageButton
+            android:id="@+id/button_phone_login"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="30dp"
             android:src="@drawable/phone"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
             tools:ignore="ContentDescription" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="30dp"
             android:src="@drawable/naver"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
             tools:ignore="ContentDescription" />
-        <!-- 위의 두 개의 버튼도 이미지 버튼으로 -->
+
+        <!-- 구글 버튼 -->
         <ImageButton
-            android:id="@+id/button_google_login"  android:layout_width="50dp"
+            android:id="@+id/button_google_login"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/google"
-            android:background="@android:color/transparent" android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
-    <!-- 하단 내비게이션 바를 위한 Placeholder (실제 구현은 BottomNavigationView로 대체) -->
+    <!-- 하단 내비게이션 바를 위한 Placeholder -->
     <View
         android:id="@+id/bottom_navigation_placeholder"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="#FFF5F5" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/link_container"
-        app:layout_constraintBottom_toTopOf="@id/social_login_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

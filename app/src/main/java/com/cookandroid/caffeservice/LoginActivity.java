@@ -1,7 +1,7 @@
 package com.cookandroid.caffeservice;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.SharedPreferences; // 내부 저장소 사용
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView signUpText;
     private ImageButton googleLoginButton;
+    private ImageButton phoneLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         signUpText = findViewById(R.id.text_signup);
         googleLoginButton = findViewById(R.id.button_google_login);
 
+        phoneLoginButton = findViewById(R.id.button_phone_login);
+
         // 2. GoogleSignInOptions 설정 및 클라이언트 객체 생성
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.server_client_id))
@@ -67,7 +70,20 @@ public class LoginActivity extends AppCompatActivity {
         // 3. Google 로그인 버튼 클릭 리스너 설정
         googleLoginButton.setOnClickListener(v -> signInWithGoogle());
 
-        // 4. 일반 로그인 버튼 클릭 리스너 설정
+        // 4. 핸드폰 버튼 클릭 시 -> 로컬 DB 초기화 (개발용)
+        if (phoneLoginButton != null) {
+            phoneLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    resetLocalDatabase(); // 초기화 함수 호출
+                }
+            });
+        } else {
+            // 혹시 버튼 ID가 달라서 null일 경우 로그 출력
+            Log.e(TAG, "phoneLoginButton is null. Check XML ID.");
+        }
+
+        // 5. 일반 로그인 버튼 클릭 리스너 설정
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // 5. 회원가입 텍스트 클릭 리스너 설정
+        // 6. 회원가입 텍스트 클릭 리스너 설정
         signUpText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,15 +102,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // -----------------------------------------------------
+    // ⭐️ [개발용] 로컬 데이터 초기화 메서드 ⭐️
+    // -----------------------------------------------------
+    private void resetLocalDatabase() {
+        SharedPreferences prefs = getSharedPreferences("UserDB", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear(); // 모든 데이터 삭제
+        editor.apply();
+        Toast.makeText(this, "⚠️ 로컬 회원 정보가 초기화되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    // -----------------------------------------------------
     // ⭐️ 화면 전환 유틸리티 메서드 ⭐️
     // -----------------------------------------------------
 
     private void navigateToMain(String token) {
-        // [추가] 내부 저장소에 로그인 상태 저장 (Mypage 등에서 사용하기 위함)
+        // [추가] 앱 설정(MyAppPrefs)에 로그인 상태 저장
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isLoggedIn", true);
-        // 토큰이나 아이디 저장 가능
         editor.putString("currentUserId", idEditText.getText().toString());
         editor.apply();
 
@@ -148,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             LoginResponse loginResponse = response.body();
                             if (loginResponse.isSuccess()) {
-                                // ⭐️ 1. Google 로그인 성공 시 MainActivity로 이동 ⭐️
                                 String accessToken = loginResponse.getAccessToken();
                                 navigateToMain(accessToken);
                             } else {
@@ -169,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // -----------------------------------------------------
-    // ⭐️ 일반 로그인 로직 (수정됨: 로컬 저장소 우선 확인) ⭐️
+    // ⭐️ 일반 로그인 로직 ⭐️
     // -----------------------------------------------------
 
     private void attemptLogin() {
@@ -186,18 +211,26 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // ================================================================
-        // [추가됨] 1. 내부 저장소(로컬 DB) 먼저 확인
-        // 서버가 꺼져 있어도 시연이 가능
+        // 1. 내부 저장소(로컬 DB) 확인
         // ================================================================
         SharedPreferences prefs = getSharedPreferences("UserDB", MODE_PRIVATE);
-        String savedPassword = prefs.getString(id, null);
 
-        if (savedPassword != null && savedPassword.equals(password)) {
-            // 로컬에 저장된 정보와 일치하면 즉시 로그인 성공 처리
-            Log.d(TAG, "로그인 성공! 메인 화면으로 이동합니다." + id);
-            navigateToMain("local_dummy_token"); // 가짜 토큰으로 이동
-            return; // 여기서 함수 종료 (서버 통신 안 함)
+        // 아이디가 저장소에 있는지 확인
+        if (prefs.contains(id)) {
+            String savedPassword = prefs.getString(id, null);
+
+            if (savedPassword != null && savedPassword.equals(password)) {
+                // 비밀번호 일치 -> 로그인 성공
+                Log.d(TAG, "Local Login Success: " + id);
+                navigateToMain("local_dummy_token"); // 가짜 토큰으로 이동
+                return; // 성공했으니 함수 종료 (서버 통신 안 함)
+            } else {
+                // 아이디는 있는데 비밀번호가 틀림 -> 실패 처리 (서버 통신 안 함)
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
+        // 로컬에 아이디가 아예 없으면 -> 서버 통신 코드로 넘어감 (혹시 서버에 있을 수 있으니)
         // ================================================================
 
 
@@ -214,7 +247,6 @@ public class LoginActivity extends AppCompatActivity {
                     LoginResponse loginResponse = response.body();
 
                     if (loginResponse != null && loginResponse.isSuccess()) {
-                        // ⭐️ 2. 일반 로그인 성공 시 MainActivity로 이동 ⭐️
                         String accessToken = loginResponse.getAccessToken();
                         navigateToMain(accessToken);
 
