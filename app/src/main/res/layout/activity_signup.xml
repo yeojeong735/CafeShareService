@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
 
-    <!-- [수정됨] LinearLayout의 ID 변경 (EditText와 이름 겹침 방지) -->
+    <!-- LinearLayout의 ID 변경 -->
     <LinearLayout
         android:id="@+id/signup_form_container"
         android:layout_width="0dp"

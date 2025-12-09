@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
                 // 탭 아이콘 색상 변경
                 updateTabIcons(clickedId);
 
-                // 즐겨찾기: 투명 배경이므로 겹치기(add)
+                // 즐겨찾기(겹치기)
                 if (clickedId == R.id.btnFavorite) {
                     showOverlayFragment(new FavoriteFragment());
                     return;
                 }
 
-                // 검색: 투명 배경이므로 겹치기(add)
+                // 검색(겹치기)
                 if (clickedId == R.id.btnSearch) {
                     showOverlayFragment(new SearchFragment());
                     return;

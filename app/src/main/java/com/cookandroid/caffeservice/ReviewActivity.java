@@ -1,4 +1,4 @@
-package com.cookandroid.caffeservice; // 실제 패키지명으로 변경해주세요
+package com.cookandroid.caffeservice;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,12 +46,10 @@ public class ReviewActivity extends AppCompatActivity {
 
         // 1-1. 카페 이름 표시 업데이트
         if (cafeName != null && cafeNameTextView != null) {
-            // 만약 cafeName이 null이면 "리뷰 작성"만 표시
-            cafeNameTextView.setText(cafeName + " 리뷰 작성");
+            cafeNameTextView.setText(cafeName);
         } else if (cafeNameTextView != null) {
             cafeNameTextView.setText("리뷰 작성");
         }
-
 
         // 2. 등록 버튼 클릭 리스너 (핵심 로직)
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +101,7 @@ public class ReviewActivity extends AppCompatActivity {
         // 임시 성공 처리
         Toast.makeText(this, "리뷰 등록 시도 중... (별점: " + rating + "점)", Toast.LENGTH_LONG).show();
 
-        // 리뷰 등록 성공 후 화면 닫기 (주석 해제 후 사용)
-        // finish();
+        // 리뷰 등록 성공 후 화면 닫기
+        finish();
     }
 }

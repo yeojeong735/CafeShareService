@@ -19,6 +19,4 @@ public class TimelineData implements Serializable {
     public String getCafeName() { return cafeName; }
     public String getCafeAddress() { return cafeAddress; }
     public String getDate() { return date; }
-
-    // 이외의 메서드 (필요하다면 추가)
 }

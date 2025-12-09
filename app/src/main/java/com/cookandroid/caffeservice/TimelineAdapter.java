@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
 
-    private ArrayList<TimelineData> mList; // ⭐ 변수 이름 mList로 통일 (오류 수정) ⭐
+    private ArrayList<TimelineData> mList; // 변수 이름 mList로 통일
 
     // 생성자
     public TimelineAdapter(ArrayList<TimelineData> list) {
@@ -29,7 +29,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TimelineData item = mList.get(position); // ⭐ mList 사용 ⭐
+        TimelineData item = mList.get(position);
 
         // 1. 카페 이름 바인딩 (tvTimelineCafeName)
         holder.tvCafeName.setText(item.getCafeName());
@@ -42,12 +42,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mList.size(); // ⭐ mList 사용 ⭐
+        return mList.size();
     }
 
-    // 뷰홀더 클래스: item_timeline_feed.xml의 ID와 일치해야 합니다.
+    // 뷰홀더 클래스: item_timeline_feed.xml의 ID와 일치해야 함
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // 이름과 주소 TextView를 연결합니다.
+        // 이름과 주소 TextView를 연결
         TextView tvCafeName, tvCafeAddress;
 
         public ViewHolder(@NonNull View itemView) {

@@ -144,7 +144,7 @@
 package com.cookandroid.caffeservice;
 
 import android.content.Intent;
-import android.content.SharedPreferences; // 추가됨
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
